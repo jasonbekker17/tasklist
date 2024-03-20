@@ -70,16 +70,11 @@ Route::get('/tasks', function () use($tasks) {
     ]);
 })->name('tasks.index');
 
-Route::get('/{id}' ,function($id) use($tasks){
+Route::get('/{id}' ,function($id) {
    
-   $task=collect($tasks)->firstWhere('id',$id);
+  
 
-   if(!$task){
-    abort( Response ::HTTP_NOT_FOUND);
-
-   }
-
-   return view('show',['task'=>$task]);
+   return view('show',['task'=> \App\Models\Task::find($id)]);
 })->name('tasks.show');
 
 
