@@ -74,7 +74,7 @@ Route::get('/{id}' ,function($id) {
    
   
 
-   return view('show',['task'=> \App\Models\Task::find($id)]);
+   return view('show',['task'=> \App\Models\Task::findorFail($id)]);
 })->name('tasks.show');
 
 
