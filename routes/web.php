@@ -19,7 +19,7 @@ return redirect()->route('tasks.index');
 
 Route::get('/tasks', function () {
     return view('index' ,[
-        'tasks' => Task::latest()->get()
+        'tasks' => Task::latest()->paginate(10)
        ]);
 })->name('tasks.index');
 
@@ -93,6 +93,14 @@ return redirect()->route('tasks.show',['task'=> $task->id])->with('success','Tas
 
 
 })->name('tasks.store');
+
+
+Route::put('tasks/{task}/toggle-complete',function(Task $task){
+
+  $task->toggleComplete();
+
+  return redirect()->back()->with('success','Task updated successfully');
+})->name('tasks.toggle-complete');
 
 
 
